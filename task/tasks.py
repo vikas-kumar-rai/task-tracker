@@ -8,19 +8,19 @@ from .models import Task, UpdateType, TaskTracker
 @shared_task
 def daily_update(sender_email):
     daily_report = Task.objects.filter(daily_updated = False)
-    task1_tracker = []
-    task2_tracker = []
-    task3_tracker = []
-    task4_tracker = []
+    task1_tracker = ''
+    task2_tracker = ''
+    task3_tracker = ''
+    task4_tracker = ''
     for report in daily_report:
         if report.task == 1:
-            task1_tracker.append(report.description)
+            task1_tracker = task1_tracker + report.description + ' \n'
         elif report.task == 2:
-            task2_tracker.append(report.description)
-        if report.task == 3:
-            task3_tracker.append(report.description)
-        if report.task == 4:
-            task4_tracker.append(report.description)
+            task2_tracker = task2_tracker + report.description + ' \n'
+        elif report.task == 3:
+            task3_tracker = task3_tracker + report.description + ' \n'
+        elif report.task == 4:
+            task4_tracker = task4_tracker + report.description + ' \n'
 
     update_type = UpdateType.objects.filter(duration='Daily').first()
     daily_update_list = TaskTracker.objects.filter(update_type=update_type.id)
@@ -48,19 +48,19 @@ def daily_update(sender_email):
 @shared_task
 def weekly_update(sender_email):
     weekly_report = Task.objects.filter(weekly_updated=False)
-    task1_tracker = []
-    task2_tracker = []
-    task3_tracker = []
-    task4_tracker = []
+    task1_tracker = ''
+    task2_tracker = ''
+    task3_tracker = ''
+    task4_tracker = ''
     for report in weekly_report:
         if report.task == 1:
-            task1_tracker.append(report.description)
+            task1_tracker = task1_tracker + report.description + ' \n'
         elif report.task == 2:
-            task2_tracker.append(report.description)
-        if report.task == 3:
-            task3_tracker.append(report.description)
-        if report.task == 4:
-            task4_tracker.append(report.description)
+            task2_tracker = task2_tracker + report.description + ' \n'
+        elif report.task == 3:
+            task3_tracker = task3_tracker + report.description + ' \n'
+        elif report.task == 4:
+            task4_tracker = task4_tracker + report.description + ' \n'
 
     update_type = UpdateType.objects.filter(duration='Weekly').first()
     weekly_update_list = TaskTracker.objects.filter(update_type=update_type.id)
@@ -88,19 +88,19 @@ def weekly_update(sender_email):
 @shared_task
 def monthly_update(sender_email):
     monthly_report = Task.objects.filter(monthly_updated=False)
-    task1_tracker = []
-    task2_tracker = []
-    task3_tracker = []
-    task4_tracker = []
+    task1_tracker = ''
+    task2_tracker = ''
+    task3_tracker = ''
+    task4_tracker = ''
     for report in monthly_report:
         if report.task == 1:
-            task1_tracker.append(report.description)
+            task1_tracker = task1_tracker + report.description + ' \n'
         elif report.task == 2:
-            task2_tracker.append(report.description)
+            task2_tracker = task2_tracker + report.description + ' \n'
         if report.task == 3:
-            task3_tracker.append(report.description)
+            task3_tracker = task3_tracker + report.description + ' \n'
         if report.task == 4:
-            task4_tracker.append(report.description)
+            task4_tracker = task4_tracker + report.description + ' \n'
 
     update_type = UpdateType.objects.filter(duration='Monthly').first()
     monthly_update_list = TaskTracker.objects.filter(update_type=update_type.id)
